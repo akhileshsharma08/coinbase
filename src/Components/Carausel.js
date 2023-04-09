@@ -5,6 +5,8 @@ import AliceCarousel from "react-alice-carousel";
 import { Link } from "react-router-dom";
 import { TrendingCoins } from "../config/api";
 import { CryptoState } from "../Context/CryptoContext";
+import 'react-alice-carousel/lib/alice-carousel.css';
+
 
 
 const Carausel = () => {
@@ -14,7 +16,7 @@ const Carausel = () => {
   const fetchTrendingCoins = async () => {
     const { data } = await axios.get(TrendingCoins(currency));
 
-    console.log(data,"carausel");
+    console.log(data, "carausel");
     setTrending(data);
   };
 
@@ -22,23 +24,46 @@ const Carausel = () => {
     fetchTrendingCoins();
   }, [currency]);
 
-  // function numberWithCommas(x) {
-  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // }
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
- const items=trending.map((coin)=>{
-  return(
-    <>
-      <div className="coinbox my-5">
-      <img src={coin.image} alt={coin.name} width={100} height={100} />
-      <h1 className='text-xl text-yellow-500'>{coin.name}</h1>
-    </div>
-    </>
-  
-  )
- })
+  const items = trending.map((coin) => {
+    let profit = coin?.price_change_percentage_24h >= 0;
 
-
+    return (
+      <div className="flex flex-wrap  justify-center ">
+        <div className='w-1/2'>
+            <Link  to={`/coins/${coin.id}`}>
+        <img
+          src={coin?.image}
+          alt={coin.name}
+          height={80 } width={80}
+          style={{ marginBottom: 10 }}
+        />
+        <span className='uppercase'>
+          {coin?.symbol}
+          &nbsp;
+          <span
+            style={{
+              color: profit > 0 ? "rgb(14, 203, 129)" : "red",
+              fontWeight: 500,
+            }}
+          >
+            {profit && "+"}
+            {coin?.price_change_percentage_24h?.toFixed(2)}%
+          </span>
+        </span>
+        <span className='uppercase' style={{ fontSize: 22, fontWeight: 500 }}><br/>
+          {symbol} {numberWithCommas(coin?.current_price.toFixed(2))}
+        </span>
+      </Link>
+        </div>
+       
+      </div>
+     
+    );
+  });
 
   const responsive = {
     0: {
@@ -50,7 +75,7 @@ const Carausel = () => {
   };
 
   return (
-    <div >
+    <div className=''>
       <AliceCarousel
         mouseTracking
         infinite
@@ -63,6 +88,7 @@ const Carausel = () => {
         autoPlay
       />
     </div>
+
   );
 }
 

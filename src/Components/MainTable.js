@@ -5,12 +5,15 @@ import { CoinList } from '../config/api'
 import Table from 'react-bootstrap/Table';
 import { Link, useParams } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+
 const MainTable = () => {
     const { currency, symbol } = CryptoState()
     const [coinlist, setCoinlist] = useState([])
     const [loading, setLoading] = useState(true)
     // const {id} = useParams()
     const [search, setSearch] = useState("")
+    const {navigate} = useNavigate()
 
     const fetchTableData = async () => {
         const { data } = await axios.get(CoinList(currency))
@@ -59,9 +62,9 @@ const MainTable = () => {
 
                             return (
                                 <>
-                                    <Link to={`/coins/${coin.id}`} >
+                                    {/* <Link to={`/coins/${coin.id}`} > */}
                                     
-                                        <tr key={coin.id} className='text-center border-t border-gray-800 py-2 text-lg hover:bg-gray-500 hover:text-yellow-500'>
+                                        <tr onClick={()=>{navigate(`/coins/${coin.id}`)}} key={coin.id} className='text-center border-t border-gray-800 py-2 text-lg hover:bg-gray-500 hover:text-yellow-500'>
                                             {/* <td>{coin.index}</td> */}
                                             <td className='py-2'>{coin.name}</td>
                                             <td className='py-2 flex justify-center'> <div className="flex justify-venter items-center"><div className='text-center mx-2'><img src={coin.image} alt={coin.name} width={30} height={30} /></div> <span className='uppercase'>{coin.symbol}</span></div>  </td>
@@ -75,7 +78,7 @@ const MainTable = () => {
                                                     coin.market_cap.toString().slice(0, -6)
                                                 )}</td>
                                         </tr>
-                                    </Link>
+                                    {/* </Link> */}
 
                                 </>
                             )
