@@ -33,9 +33,9 @@ const Header = () => {
                                 </svg>
                             </span>
                         </div>
-                        <div>
+                        {/* <div>
                         <Link to={'/login'} className="inline-flex py-2 text-lg items-center bg-yellow-500 hover:bg-yellow-400 text-white border-0 py-1 px-3 focus:outline-none  rounded text-base mt-4 md:mt-0">Log in</Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </header>

@@ -3,6 +3,7 @@ import '../App.css'
 
 import Carausel from './Carausel'
 import CoinTable from './CoinTable'
+import WhyUs from './WhyUs'
 
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
       </div>
 
       <CoinTable />
+      <WhyUs/>
     </div>
   )
 }

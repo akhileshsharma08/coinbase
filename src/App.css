@@ -10,3 +10,74 @@
   background-repeat: no-repeat;
   width: 100%;
 }
+
+#mybtnpage{
+  color: white;
+  background-color: #eab308;
+  padding: 10px 16px;
+  margin-left: 5px;
+  border-radius: 100%;
+  font-weight: bold;
+}
+#mybtnpage:hover{
+  background-color: #b18c1e;
+
+}
+.mychosebox{
+  height: 15rem;
+}
+.btclogo{
+  background-image: url('../public/bitcc.png');
+  width: 100%;
+  height: fit-content;
+  height: 40rem;
+  background-repeat: no-repeat;
+}
+@media screen and (max-width <= 700px){ 
+  .btclogo{
+    width: 40%;
+    height: 30vh;
+    background-size: contain;
+  }
+}
+.mychosebox{
+
+  color: black;
+  background: rgba(255, 255, 255, 0.932);
+  /* background-color: #eab308; */
+  border: 2px solid #eab308;
+  border-color: #eab308;
+  border-radius: 40px;
+  overflow: hidden;
+ 
+}
+
+
+
+.mychosebox:hover{
+  color: black;
+  background-color: #b48d17;
+
+}
+
+
+.footerimg{
+  background-image: url('./images/footer-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 50vh;
+  padding-bottom: 10px;
+}
+
+@media (min-width<801px) {
+  .footerimg{
+    width: 50%;
+    background-size: contain;
+    height: 0 !important;
+  }
+  .footerimg>h1{
+    bottom: 10px;
+    position: fixed;
+  }
+}
