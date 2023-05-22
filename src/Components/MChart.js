@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { HistoricalChart } from "../config/api";
+// import { HistoricalChart } from "../config/api";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../Context/CryptoContext";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
@@ -14,15 +14,18 @@ const MChart = ({ coin }) => {
     const [days, setDays] = useState(1);
     const { currency } = CryptoState();
     const [flag, setflag] = useState(false);
-    const { id } = useParams()
-
-    const fetchHistoricData = async () => {
-        const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
+    const myCurrency=currency.toLowerCase()
+    const myid=coin.id
+    
+    const fetchHistoricData = async ( days = 365) => {
+        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${myid}/market_chart?vs_currency=${myCurrency}&days=${days}`);
+      console.log(data,'apo')
         setflag(true);
         setHistoricData(data.prices);
     };
 
-    console.log(coin);
+    console.log(historicData,"jhj");
+    console.log(currency,myid,"jhcurrencyj");
 
     useEffect(() => {
         fetchHistoricData();
@@ -65,7 +68,7 @@ const MChart = ({ coin }) => {
                                     },
                                 }}
                             />
-                            <div className="flex container px-8 justify-around mt-20  ">
+                            <div className="flex  w-full px-8 justify-around mt-20  ">
                                 {chartDays.map((day) => (
                                     <div>
                                           <button className="border border-yellow-500 mx-2 px-4 py-2 hover:bg-yellow-500 hover:text-white"
