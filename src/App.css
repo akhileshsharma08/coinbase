@@ -81,3 +81,8 @@
     position: fixed;
   }
 }
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #fdc646;
+}

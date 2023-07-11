@@ -5,7 +5,7 @@ import { SingleCoin } from '../config/api'
 import { useParams } from 'react-router-dom'
 import DOMPurify from "dompurify";
 import MChart from './MChart'
-
+import '../App.css'
 
 
 
@@ -22,6 +22,7 @@ const Coindetail = () => {
   }
   let curId = currency.toLowerCase()
 
+  console.log(coin.id,"single coin")
   useEffect(() => {
     fetchSingleCoin()
   }, [currency])
@@ -35,9 +36,9 @@ const Coindetail = () => {
   console.log(coin, "coin")
   return (
     <>
-      <div className="coinbox flex md:justify-center justify-center md:flex-row flex-col min-h-screen  bg-gray-900 text-white">
-        <div className="container w-full md:w-1/4 mx-auto  py-8">
-          <div className="imgbox container mx-4 flex justify-center items-center flex-col   ">
+      <div className="coinbox flex md:justify-center justify-center relative  min-h-screen  bg-gray-900 text-white">
+        <div className="container w-full flex justify-center items-center absolute  mx-auto  py-8">
+          <div className="imgbox container mx-auto flex justify-center items-center flex-col   ">
             <div className="IMG">
               {coin.image ? <img src={coin.image.large} alt={coin.id} width={150} height={150} /> : null}
             </div>
@@ -51,7 +52,7 @@ const Coindetail = () => {
                   coin.market_data.current_price[currency.toLowerCase()].toString()
                 )
                 : null}</h1>
-              <div className="para py-2 h-28 overflow-y-auto scroll-yellow-500">
+              <div className="para  h-44 overflow-y-auto scroll-yellow-500 border-2 border-yellow-500 border-r-0 py-4 my-4 rounded">
                 <p className=' mx-4 '
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(
@@ -66,7 +67,7 @@ const Coindetail = () => {
         </div>
         <div className="desc w-3/4 text-center my-5 flex justify-center mx-auto">
           <div className="div ">
-            <MChart coin={coin} />
+            {/* <MChart coin={coin} id={coin.id} /> */}
           </div>
 
         </div>

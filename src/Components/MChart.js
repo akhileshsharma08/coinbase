@@ -9,23 +9,25 @@ import { Line } from "react-chartjs-2";
 
 
 
-const MChart = ({ coin }) => {
+const MChart = ({ coin,id }) => {
     const [historicData, setHistoricData] = useState([]);
     const [days, setDays] = useState(1);
     const { currency } = CryptoState();
     const [flag, setflag] = useState(false);
     const myCurrency=currency.toLowerCase()
-    const myid=coin.id
+    // const myid=coin.id
+    console.log(coin,"coin")
+    console.log(id,"coinid")
     
-    const fetchHistoricData = async ( days = 365) => {
-        const { data } = await axios.get(`https://api.coingecko.com/api/v3/coins/${myid}/market_chart?vs_currency=${myCurrency}&days=${days}`);
+    const fetchHistoricData = async ( id,days = 365) => {
+        const { data } = await axios.get(`/api/v3/coins/ethereum/market_chart?vs_currency=${myCurrency}&days=${days}`);
       console.log(data,'apo')
         setflag(true);
-        setHistoricData(data.prices);
+        await setHistoricData(data.prices);
     };
 
     console.log(historicData,"jhj");
-    console.log(currency,myid,"jhcurrencyj");
+    console.log(currency,id,"jhcurrencyj");
 
     useEffect(() => {
         fetchHistoricData();
